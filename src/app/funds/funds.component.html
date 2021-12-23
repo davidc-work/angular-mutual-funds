@@ -10,13 +10,13 @@
             <th>Price</th>
             <th></th>
         </tr>
-        <tr *ngFor="let fund of funds">
+        <tr *ngFor="let fund of funds" (click)="viewFund(fund.id)">
             <td>{{fund.id}}</td>
-            <td><a (click)="viewFund(fund.id)">{{fund.name}}</a></td>
+            <td><a>{{fund.name}}</a></td>
             <td>{{fund.ticker}}</td>
             <td>{{fund.assetClass}}</td>
             <td>{{fund.price}}</td>
-            <td class="x-cell"><img (click)="deleteFund(fund.id)" class="x" src="../../assets/img/x.png"/></td>
+            <td class="x-cell"><img (click)="deleteFund(fund.id); $event.stopPropagation();" class="x" src="../../assets/img/x.png"/></td>
         </tr>
     </table>
 </div>

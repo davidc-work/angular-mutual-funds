@@ -1,6 +1,10 @@
 .titlebar {
   width: 100%;
-  height: 100px;
+  height: 75px;
+}
+
+a {
+  text-decoration: none;
 }
 
 .titlebar-overlay {
@@ -8,19 +12,21 @@
   left: 0;
   position: fixed;
   width: 100%;
-  height: 100px;
+  height: 75px;
   background-color: rgb(255, 255, 255);
-  box-shadow: 0 0 5px black;
+  box-shadow: 0 0 4px #9d9d9d;
   z-index: 9;
 }
 
 #title {
   text-align: left;
-  transform: translateX(30px);
-  font-size: 48px;
+  transform: translateX(90px);
+  font-size: 32px;
   margin: 0;
-  line-height: 100px;
+  line-height: 75px;
   width: fit-content;
+  font-family: 'roadrunners';
+  color: #b30000;
 }
 
 .container {
@@ -41,11 +47,11 @@ header a {
   background-color: white;
   text-decoration: none;
   height: 100%;
-  width: 140px;
+  width: 115px;
   display: inline-block;
   text-align: center;
   color: black;
-  line-height: 100px;
+  line-height: 75px;
 
   &:hover {
     background-color: rgb(240, 240, 240);

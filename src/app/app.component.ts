@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   title = 'mutual';
   currentUrl: any;
   previousUrl: any;
+  keysPressed:string[] = [];
 
   constructor(private router: Router) {
     router.events.subscribe(v => window.scrollTo(0, 0));
@@ -24,10 +25,18 @@ export class AppComponent implements OnInit {
 
     this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized), 
     pairwise()).subscribe((events: RoutesRecognized[]) => {
-      // console.log('previous url', events[0].urlAfterRedirects);
-      // console.log('current url', events[1].urlAfterRedirects);
       this.previousUrl = events[0].urlAfterRedirects;
       this.currentUrl = events[1].urlAfterRedirects;
+    });
+
+    document.body.addEventListener('keydown', e => {
+      this.keysPressed.push(e.key);
+      this.keysPressed = this.keysPressed.slice(-20);
+      var lastThree = this.keysPressed.slice(-3).join('');
+      if (lastThree == 'lol' && ['add', 'edit'].includes(this.router.url.split('/').slice(-1)[0])) { // lol
+        var elements = Array.from(document.getElementsByTagName('input') as HTMLCollectionOf<HTMLInputElement>);
+        elements.forEach((e, i) => e.value = 'testing ' + i);
+      }
     });
   }
 }

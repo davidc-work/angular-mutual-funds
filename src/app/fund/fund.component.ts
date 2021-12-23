@@ -14,6 +14,7 @@ export class FundComponent implements OnInit {
 
   fund:Fund = {};
   keys:any;
+  id:number = 0;
 
   constructor(private route:ActivatedRoute, private fundService: FundService, private router: Router, private appComponent: AppComponent) {
     this.router = router;
@@ -28,12 +29,11 @@ export class FundComponent implements OnInit {
       }
     }
     this.route.params.subscribe(params=>{
-      const myid = +params['id'];
-      this.fundService.getFund(myid).subscribe(payload=>{
-        console.log(payload);
+      this.id = +params['id'];
+      this.fundService.getFund(this.id).subscribe(payload=> {
         this.fund = payload;
         this.keys = Object.keys(this.fund);
-      })
+      });
     });
   }
 
@@ -45,5 +45,12 @@ export class FundComponent implements OnInit {
     var e: HTMLElement = <HTMLElement>document.getElementsByClassName('scroll')[0];
     e.style.animation = '0.25s out-to-right';
     setTimeout(() => this.router.navigateByUrl('/funds'), 250);
+  }
+
+  delete() {
+    if (!confirm('Are you sure you want to delete fund ' + this.id + '?')) return ;
+    this.fundService.deleteFund(this.id).subscribe(d => {
+      this.back();
+    });
   }
 }

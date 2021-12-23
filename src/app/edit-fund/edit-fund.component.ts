@@ -19,16 +19,17 @@ export class EditFundComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params=>{
       this.myId = +params['id'];
-      this.fundService.getFund(this.myId).subscribe(payload=>{
-        console.log(payload);
+      this.fundService.getFund(this.myId).subscribe(payload=> {
         this.fund = payload;
         this.keys = Object.keys(this.fund);
-      })
+      });
     });
   }
 
   back() {
-    this.router.navigateByUrl(this.router.url.slice(0, this.router.url.lastIndexOf('/')));
+    var elements = Array.from(document.getElementsByTagName('input') as HTMLCollectionOf<HTMLElement>);
+    elements.forEach(e => e.style.animation = '0.5s fade-out');
+    setTimeout(() => this.router.navigateByUrl(this.router.url.slice(0, this.router.url.lastIndexOf('/'))), 500);
   }
 
   apply() {
